@@ -2,6 +2,7 @@
 
 import { getFlights as apiGetFlights } from '@/src/features/search-feature/api/searchApiService'
 import SearchContent from '@/src/features/search-feature/components/search-content'
+import cutFlightsExtraData from '@/src/features/search-feature/utils/cut-flights-extra-data'
 
 const getFlights = async () => {
   try {
@@ -13,10 +14,12 @@ const getFlights = async () => {
 
 export default async function Search() {
   const flights = await getFlights()
+
+  const flightsWithoutExtraData = cutFlightsExtraData(flights)
+
   return (
     <div>
-      Search page
-      <SearchContent flights={flights}/>
+      <SearchContent flights={flightsWithoutExtraData} />
     </div>
   )
 }
