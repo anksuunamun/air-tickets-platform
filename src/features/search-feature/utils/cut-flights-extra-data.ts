@@ -8,6 +8,7 @@ export default function cutFlightsExtraData(flights) {
       currency: flight.price.total.currency,
       ticket: shapeFlightTicket(ticket),
       returnTicket: shapeFlightTicket(returnTicket),
+      duration: +ticket.duration + +returnTicket.duration
     }
   })
 }
