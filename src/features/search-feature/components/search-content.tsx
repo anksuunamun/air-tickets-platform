@@ -15,14 +15,14 @@ export default function SearchContent({ flights }: SearchContentType) {
     const sortedFlights = sortFlights(flights, ...currentSorting.split(" "))
     setDisplayedFlights(sortedFlights)
   }, [currentSorting, setCurrentSorting])
- 
+
   const changeCurrentSorting = (value: string) => setCurrentSorting(value)
 
   return (
-    <div className="flex flex-row flex-nowrap	justify-between items-start gap-7 pt-8 px-10">
-      <SearchSettings {...{  currentSorting, changeCurrentSorting }}/>
+    <div className="flex flex-row flex-nowrap	justify-between items-start gap-7 pt-8 px-20">
+      <SearchSettings {...{currentSorting, changeCurrentSorting}} />
 
-      <SearchResults />
+      <SearchResults flights={displayedFlights}/>
     </div>
   )
 }

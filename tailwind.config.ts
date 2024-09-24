@@ -7,8 +7,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'blue': '#6495ED',
+        'light-blue': '#daf0ff',
+        'yellow': '#eda864',
+        'white': '#fff',
       },
     },
   },
