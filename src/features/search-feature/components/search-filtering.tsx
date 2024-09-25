@@ -12,6 +12,7 @@ export default function SearchFiltering(
     currentAirlinesFilter,
     changeStopsFilter,
     changeAirlinesFilter,
+    disabledFilterAirlines,
   }: SearchFilteringType) {
   return (
     <div>
@@ -60,6 +61,7 @@ export default function SearchFiltering(
                     <input
                       type="checkbox"
                       value={`${airline.value}:::${airline.caption}`}
+                      disabled={disabledFilterAirlines.includes(airline.value)}
                       checked={
                         currentAirlinesFilter
                           .map(airline => airline.value)

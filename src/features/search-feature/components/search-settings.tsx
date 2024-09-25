@@ -15,6 +15,7 @@ export default function SearchSettings(
     currentStopsFilter,
     changeStopsFilter,
     changeAirlinesFilter,
+    disabledFilterAirlines,
   }: SearchSettingsType
 ) {
   return (
@@ -28,6 +29,7 @@ export default function SearchSettings(
         currentAirlinesFilter,
         changeStopsFilter,
         changeAirlinesFilter,
+        disabledFilterAirlines,
       }} />
     </div>
   )

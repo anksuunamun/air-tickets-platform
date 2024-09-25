@@ -7,16 +7,13 @@ import SearchSettings from '@/src/features/search-feature/components/search-sett
 import sortFlights from '@/src/features/search-feature/utils/sort-flights'
 import getAirlinesFromFlights from "@/src/features/search-feature/utils/get-airlines-from-flights";
 import getStopsFromFlights from "@/src/features/search-feature/utils/get-stops-from-flights";
+import filterFlightsByStops from "@/src/features/search-feature/utils/filter-flights-by-stops";
+import {filterFlightsByAirlines} from "@/src/features/search-feature/utils/filter-flights-by-airlines";
 
 export default function SearchContent({ flights }: SearchContentType) {
   const [displayedFlights, setDisplayedFlights] = useState([])
 
   const [currentSorting, setCurrentSorting] = useState('price asc')
-
-  useEffect(() => {
-    const sortedFlights = sortFlights(flights, ...currentSorting.split(" "))
-    setDisplayedFlights(sortedFlights)
-  }, [currentSorting, setCurrentSorting])
 
   const changeCurrentSorting = (value: string) => setCurrentSorting(value)
 
@@ -25,8 +22,46 @@ export default function SearchContent({ flights }: SearchContentType) {
 
   const [currentStopsFilter, setCurrentStopsFilter] = useState([])
   const [currentAirlinesFilter, setCurrentAirlinesFilter] = useState([])
+  const [disabledFilterAirlines, setDisabledFilterAirlines] = useState([])
+
+  useEffect(() => {
+    /*
+    @TODO: Need refactoring. Too many responsibilities on `filterFlightsByStops`.
+     */
+    const {
+      filteredFlights: flightsFilteredByStops,
+      suitableAirlines,
+      allAirlinesSuitable,
+    } = filterFlightsByStops(flights, currentStopsFilter)
+
+    if (allAirlinesSuitable) {
+      setDisabledFilterAirlines([])
+    } else {
+      setDisabledFilterAirlines(() => {
+        return airlinesFilterVariants
+          .map(airline => airline.value)
+          .filter(airline => !suitableAirlines.includes(airline))
+      })
+    }
+
+    const flightsFilteredByAirlines
+      = filterFlightsByAirlines(flightsFilteredByStops, currentAirlinesFilter)
+
+    const sortedFlights = sortFlights(flightsFilteredByAirlines, ...currentSorting.split(" "))
+
+    setDisplayedFlights(sortedFlights)
+  }, [
+    currentSorting,
+    setCurrentSorting,
+    currentAirlinesFilter,
+    currentStopsFilter,
+    setCurrentAirlinesFilter,
+    setCurrentStopsFilter,
+    flights,
+  ])
 
   const changeStopsFilter = ((event: ChangeEvent<HTMLInputElement>) => {
+    // @TODO: Translate comment to eng
     // @TODO: Подумать, как лучше передавать значения чекбокса в обработчик.
     const [
       value,
@@ -45,6 +80,7 @@ export default function SearchContent({ flights }: SearchContentType) {
   })
 
   const changeAirlinesFilter = ((event: ChangeEvent<HTMLInputElement>) => {
+    // @TODO: Translate comment to eng
     // @TODO: Подумать, как лучше передавать значения чекбокса в обработчик.
     const [
       value,
@@ -73,6 +109,7 @@ export default function SearchContent({ flights }: SearchContentType) {
           currentAirlinesFilter,
           changeStopsFilter,
           changeAirlinesFilter,
+          disabledFilterAirlines,
         }}
       />
 

@@ -13,6 +13,7 @@ export type SearchSettingsType = {
   currentAirlinesFilter: any
   changeStopsFilter: (event: ChangeEvent<HTMLInputElement>) => void
   changeAirlinesFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  disabledFilterAirlines: any
 }
 
 export type SearchSortingType = {
@@ -60,4 +61,5 @@ export type SearchFilteringType = {
   currentAirlinesFilter: any
   changeStopsFilter: (event: ChangeEvent<HTMLInputElement>) => void
   changeAirlinesFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  disabledFilterAirlines: any
 }
