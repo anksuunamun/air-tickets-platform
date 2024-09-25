@@ -4,7 +4,7 @@ import { SearchSettingsTitleType } from '@/src/features/search-feature/types/typ
 
 export default function SearchSettingsTitle({ text = '' }: SearchSettingsTitleType) {
   return (
-    <div className="font-bold">
+    <div className="font-bold mb-4">
       {text}
     </div>
   )

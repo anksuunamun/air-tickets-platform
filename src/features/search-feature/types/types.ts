@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export type SearchContentType = {
   flights: any
 }
@@ -5,6 +7,12 @@ export type SearchContentType = {
 export type SearchSettingsType = {
   currentSorting: string
   changeCurrentSorting: (value: string) => void
+  airlines: any
+  stops: any
+  currentStopsFilter: any
+  currentAirlinesFilter: any
+  changeStopsFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  changeAirlinesFilter: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type SearchSortingType = {
@@ -43,4 +51,13 @@ export type TicketType = {
   arrivalAirportUid: string | number,
   arrivalCityCaption: string,
   arrivalDate: string,
+}
+
+export type SearchFilteringType = {
+  airlines: any
+  stops: any
+  currentStopsFilter: any
+  currentAirlinesFilter: any
+  changeStopsFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  changeAirlinesFilter: (event: ChangeEvent<HTMLInputElement>) => void
 }
