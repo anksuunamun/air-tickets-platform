@@ -49,13 +49,13 @@ export default function SearchSorting({ currentSorting, changeCurrentSorting }: 
       <div className="flex flex-row gap-2 items-center justify-start">
         <input
           type="radio"
-          id="duration-asc"
+          id="duration-desc"
           name="currentSorting"
-          value="duration asc"
-          checked={currentSorting === "duration asc"}
+          value="duration desc"
+          checked={currentSorting === "duration desc"}
           onChange={changeCurrentSortingHandler}
         />
-        <label htmlFor="duration-asc">по убыванию времени в пути</label>
+        <label htmlFor="duration-desc">по убыванию времени в пути</label>
       </div>
     </SearchSettingsSection>
   )
